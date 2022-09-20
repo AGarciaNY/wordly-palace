@@ -1,10 +1,40 @@
+
+
 * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
-
-
+body{
+    padding:0;
+    margin:0;
+     background-image: url(https://img.freepik.com/premium-photo/book-study-educated-library-dictionary-background-studying-students-universities-colleges-schoolchildren-school-home-distance-learning-concept_90380-1100.jpg);
+    /* background-image: url(https://www.ucsu.org/asset/Event/6013/Memory.gif); */
+    background-repeat: no-repeat;
+    height: 500px;
+    background-size: cover;
+}
+#dialog-box{
+    width: 350px;
+    height: 80px;
+    margin: 100px auto;
+    background-color: #f2f2f2;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border: 1px solid #666666;
+    padding: 15px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 15px;
+    border: 3px solid #cccccc;
+    position: absolute;
+    left: 50%;
+    top: 300px;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+  }
 #theNav {
     position: sticky;
     top: 0px;
@@ -122,8 +152,8 @@ footer {
 
 #container {
     position: fixed;
-    top: 150px;
-    left: 400px;
+    top: 200px;
+    left: 600px;
 }
 
 h3 {

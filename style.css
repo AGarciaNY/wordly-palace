@@ -1,0 +1,44 @@
+body{
+    padding:0;
+    margin:0;
+     background-image: url(https://img.freepik.com/premium-photo/book-study-educated-library-dictionary-background-studying-students-universities-colleges-schoolchildren-school-home-distance-learning-concept_90380-1100.jpg);
+    /* background-image: url(https://www.ucsu.org/asset/Event/6013/Memory.gif); */
+    background-repeat: no-repeat;
+    height: 500px;
+    background-size: cover;
+}
+h3{
+    display:flex ;
+    justify-content: center;
+    background-color: white;
+    border: 2px solid black;
+    max-width: 700px;
+    margin: auto;
+}
+#word-container{
+    /* display: flex; */
+    border: 8px solid grey;
+    justify-content: center;
+    align-content: center;
+    max-width: 700px;
+    margin: auto;
+    text-align: center;
+    background-color: #D5B87C;
+}
+#arrayOfWords{
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(4,auto);
+    /* border: 5px solid black; */
+    margin-top: 100px;
+    background-color: white #D5B87C;
+    grid-gap: 30px;
+}
+#discription{
+    background-color: #D5B87C;
+    max-width: 700px;
+    margin: auto;
+}
+/* #arrayOfWords + button {
+    border: 1px solid black;
+} */

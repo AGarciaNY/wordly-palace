@@ -1,27 +1,169 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
 
-#circle1{ width:50px; 
-    height:50px; 
+
+#theNav{
+    position: sticky;
+    top: 0px;
+    display: flex;
+    text-align: center;
+    justify-content: flex-end;
+    border-bottom:2px solid black;
+    background-color:#DCC8FE;
+}
+a{
+    color:black;
+    text-decoration: none;
+    height: 30px;
+    line-height: 30px;
+    font-size: 25px;
+    margin-right: 25px;
+    margin-top: 5px;
+    font-style:normal;
+}
+a:hover {
+  background-color: #DCC8FE;
+  border-radius: 190px;
+}
+#theNav ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+#theNav li {
+    list-style: none;
+    display: flex;
+    margin: 5px;
+    flex-wrap: wrap;
+}
+
+footer{
+    display: flex;
+    width: 0 auto;
+    background-color:#DCC8FE;
+    position: sticky;
+    justify-content: flex-end;
+    position:fixed;bottom:0;left:0;right:0;height: 0 auto;
+    border-top:2px solid black;
+    flex-wrap: wrap;
+}
+.ulFooter{
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+    flex-wrap: wrap;
+}
+.ulFooter li{
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 10px;
+    flex-wrap: wrap;
+}
+#sad{ 
+    width:70px; 
+    height:70px; 
+    cursor: pointer;
     border-radius: 50%; 
 background-color:red;
 padding:20px;}
-#circle2{ width:50px; 
-    height:50px; 
+#happy{
+    display:flex;
+    justify-content:center;
+    cursor:grab;
+    width:70px; 
+    height:70px; 
     border-radius: 50%; 
 background-color: green;
 padding:20px;}
-#circle3{ width:50px; 
-    height:50px; 
+#tired{ 
+    display:flex;
+    justify-content:center;
+    cursor:crosshair;
+    width:70px; 
+    height:70px; 
     border-radius: 50%; 
 background-color: yellow;
 padding:20px;
+
 }
 
 #mood_con{
-    display:flex;
-    width:500px;
-    height:500px;
-    border: black 25px;
-    justify-content:space-evenly;
-align-items: center;
-    padding:25px;
+    display: flex;
+    position:fixed;
+    top:100px;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    background-color: aliceblue;
+    border: 20px solid black ;
+    width:110px;
+    height:330px;
+   background-color: transparent;
+}
+
+#container{
+position:fixed;
+top:150px;
+left:400px;
+}
+
+
+
+
+body{
+    padding:0;
+    margin:0;
+     background-image: url(https://img.freepik.com/premium-photo/book-study-educated-library-dictionary-background-studying-students-universities-colleges-schoolchildren-school-home-distance-learning-concept_90380-1100.jpg);
+    /* background-image: url(https://www.ucsu.org/asset/Event/6013/Memory.gif); */
+    background-repeat: no-repeat;
+    height: 500px;
+    background-size: cover;
+  
+}
+h3{
+    display:flex ;
+    justify-content: center;
+    background-color: white;
+    border: 2px solid black;
+    max-width: 700px;
+    margin: auto;
+}
+#img{
+position:fixed;
+left :300px;
+top:300px;
+}
+
+#word-container{
+    /* display: flex; */
+    border: 8px solid grey;
+    justify-content: center;
+    align-content: center;
+    max-width: 700px;
+    margin: auto;
+    text-align: center;
+    background-color: #D5B87C;
+}
+
+#next{
+position:relative;
+
+}
+#arrayOfWords{
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(4,auto);
+    /* border: 5px solid black; */
+    margin-top: 100px;
+    background-color: white #D5B87C;
+    grid-gap: 30px;
+}
+#discription{
+    background-color: #D5B87C;
+    max-width: 700px;
+    margin: auto;
 }

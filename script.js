@@ -1,147 +1,90 @@
-const signUpAuthorization = function () {
-    const creds = {
-        client_id: `325321fbe95244a79af7e14e52867182`,
-        clientSecret: `YTBmNGJlZTlhYTEyNDFhNTkxNmRhYWZkN2I3YTFlZjQ=`,
-        redirectUri: `https%3A%2F%2Fcarmensalas14.github.io%2Fvybe-app%2Fapp.html`,
-        scope: `user-read-private%20user-library-read%20user-read-email%20playlist-modify-public`
-    }
-    let authorizationReq = `https://accounts.spotify.com/authorize?client_id=${creds.client_id}&redirect_uri=${creds.redirectUri}&response_type=token&&scope=${creds.scope}`
-    window.location = authorizationReq;
-}
+window.addEventListener("DOMContentLoaded", () => {
+    //dom Elements
+    let nameOfWord = document.getElementById("nameOfWord")
+    let defination = document.getElementById("defination")
+    let pronounceW = document.getElementById("pronounce")
+    let audioBtn = document.getElementById("audiobtn")
+    let arrayOfW = document.getElementById("arrayOfWords")
+    let showing = document.getElementById("discription")
+    let submit=document.getElementById("submit")
+    let next=document.getElementById("next")
+ let img=document.getElementById("img")
 
-// const encodedParams = new URLSearchParams();
-// encodedParams.append("text", `${h2.innerHTML}`);
 
-// const url = 'https://text-sentiment.p.rapidapi.com/analyze';
+    
 
-// const options = {
-//   method: 'POST',
-//   headers: {
-//     'content-type': 'application/x-www-form-urlencoded',
-//     'X-RapidAPI-Key': 'a814b05c93msh2cd39afebec73fap1d509cjsnb19622b7a4fa',
-//     'X-RapidAPI-Host': 'text-sentiment.p.rapidapi.com'
-//   },
-//   body: encodedParams
-// };
-const params = new URLSearchParams(window.location.hash);
-const accessToken = params.get("#access_token");
-console.log(accessToken)
-const playButtonDiv = document.getElementById("playButtonDiv")
+    // fetch("https://random-word-api.herokuapp.com/All").then(res => res.json())
+    // .then(data => console.log(data[0]))
+    //varibles
+    let url = "https://random-words-with-pronunciation.p.rapidapi.com/word?rapidapi-key=d90feb3493msh188349b87904e98p1e8634jsne0ad3411d51a"
+        fetch("https://random-words-with-pronunciation.p.rapidapi.com/word?rapidapi-key=d90feb3493msh188349b87904e98p1e8634jsne0ad3411d51a")
+        .then(res => res.json()).then(json => {
+          
+            let word = `${json[0].word}`
+            nameOfWord.innerText = `${json[0].word}`
+            defination.innerText = `Definition: ${json[0].definition}`
+             pronounceW.innerText = `Pronunciation: ${json[0].pronunciation}`
+    //Event listener for adding the speech
+        audioBtn.addEventListener("click", () => {
+            speaks = [
+                {
+                  "name": "Alex",
+                  "lang": "en-US"
+                }
+            ]
+         const msg = new SpeechSynthesisUtterance();
+            msg.volume = 1; // 0 to 1
+            msg.rate = 1; // 0.1 to 10
+            msg.pitch = 1.5; // 0 to 2
+            msg.text  = `${json[0].word}` ;
+        speechSynthesis.speak(msg);
+        })
+        })
+        function fetch20Times() {
+            for(let i = 1; i <= 20; i++) {
+             fetch("https://random-word-api.herokuapp.com/word").then(res => res.json()).then(data => {
+                let randomW = document.createElement("button")
+                arrayOfW.appendChild(randomW)
+                randomW.innerText = `${data[0]}`
+                randomW.style.marginTop = `${Math.random() * 10}px`
+                randomW.style.marginLeft = `${Math.random() * 10}px`
+                let word = `${data[0]}`
+              // eventlistener for when the button is clicked
+                randomW.addEventListener("click", () => {
+                  arrayOfW.innerText = "";
+                  fetch(`https://wordsapiv1.p.rapidapi.com/words/${word}?rapidapi-key=d90feb3493msh188349b87904e98p1e8634jsne0ad3411d51a`)
+                  .then(res => res.json()).then(data2 => {
+                    console.log(data2)
+                     let name = document.createElement("p")
+                     let meaning = document.createElement("p")
+                     let example = document.createElement("p")
+                     showing.append(name,meaning,example)
+                     nameOfWord.innerText = `Word: ${data2[0].word}`
+                    
+                    
+                  })
+                })
+              });
+            }
+          }
+          fetch20Times()
+    })
 
-// Getting user's Spotify ID
-const getUserId = async function () {
-    const response = await fetch('https://api.spotify.com/v1/me', {
-        headers: {
-            'Authorization': 'Bearer ' + accessToken
-        }
-    });
-    const json = await response.json()
-    const id = await json.id
-    return id
-};
+    submit.addEventListener('click', function (event) {
+        const addComment = document.forms["comment-form"]
+        addComment.hidden = true
+        event.preventDefault()
+        const value = addComment.querySelector(`input[type="text"]`).value
+    })    
 
-// getting user's first 50 saved tracks
-const getUserSavedTracks = async function () {
-    const response = await fetch('https://api.spotify.com/v1/me/tracks?offset=0&limit=50', {
-        headers: {
-            'Authorization': 'Bearer ' + accessToken
-        }
-    });
-    const json = await response.json()
-    return json
-};
 
-// getting user library response array
-const getTrackItems = async function () {
-    const data = await getUserSavedTracks();
-    const items = await data.items
-    return items
-};
 
-// get track ID
-const getUserTrackId = async function () {
-    const data = await getUserSavedTracks();
-    const items = await data.items
-    return items.map(item => item.track.id)
-};
 
-// get track URI 
-const getUserTrackURI = async function () {
-    const data = await getUserSavedTracks();
-    const items = await data.items
-    return items.map(item => item.track.uri)
-};
 
-//create new playlist for filtered saved tracks
-const createPlaylist = async function (name) {
-    const user_id = await getUserId();
-    const playlist = await fetch(`https://api.spotify.com/v1/users/${user_id}/playlists`, {
-        method: 'POST',
-        body: JSON.stringify({
-            name: name,
-        }),
-        headers: {
-            'Authorization': 'Bearer ' + accessToken,
-            'Content-Type': 'application/json',
-        }
-    });
-    const emptyPlaylist = await playlist.json()
-    const playlistID = await emptyPlaylist.id
-    return playlistID
-};
 
-// Generate Playlist with added tracks function  
-const generatePlaylist = async function (name, trackItems) {
 
-    const playlist_id = await createPlaylist(name);
 
-    playButtonDiv.innerHTML = `<iframe src="https://open.spotify.com/embed/playlist/${playlist_id}" width="500" height="1000" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>`
-
-    // ADD TRACKS TO PLAYLIST 
-    return fetch(`https://api.spotify.com/v1/playlists/${playlist_id}/tracks`, {
-        method: 'POST',
-        body: JSON.stringify({
-            uris: trackItems
-        }),
-        headers: {
-            'Authorization': 'Bearer ' + accessToken,
-            'Content-Type': 'application/json'
-        }
-    });
-}
-
-// GET TRACK ENEGRY LEVELS 
-const trackAudioFeat = async function () {
-    const data = await getUserTrackId()
-    const dataArray = []
-    for (let i = 0; i < data.length; i++) {
-        dataArray.push(data[i])
-    }
-    const dataString = dataArray.join(',')
-
-    const response = await fetch(`https://api.spotify.com/v1/audio-features/?ids=${dataString}`, {
-        headers: {
-            'Authorization': 'Bearer ' + accessToken
-        }
-    });
-    const json = await response.json();
-    return json.audio_features.map(track => track.energy)
-}
-
-// function that creates object for main data
-const getMainData = async function () {
-    const track_items = await getTrackItems();
-    const track_uri = await getUserTrackURI();
-    const track_energy = await trackAudioFeat();
-
-    return {
-        'items': track_items,
-        'track_uri': track_uri,
-        'track_energy': track_energy,
-    }
-
-}
-
+    //Mood meter elements
 const happy = document.getElementById('happy');
 const tired = document.getElementById('tired');
 const sad = document.getElementById('sad');
@@ -199,3 +142,26 @@ sad.addEventListener('click', async(e) => {
 audio3.play();
 
 });
+
+const options = {
+	method: 'GET',
+	headers: {
+		'X-RapidAPI-Key': 'a814b05c93msh2cd39afebec73fap1d509cjsnb19622b7a4fa',
+		'X-RapidAPI-Host': 'deezerdevs-deezer.p.rapidapi.com'
+	}
+};
+
+fetch('https://deezerdevs-deezer.p.rapidapi.com/search?q=eminem', options)
+	.then(response => response.json())
+	.then(response => window.open(response.data[9].preview))
+	.catch(err => console.error(err));
+
+
+    submit.addEventListener('click', function (event) {
+        const addComment = document.forms["comment-form"]
+        addComment.hidden = true
+        event.preventDefault()
+    const value = addComment.querySelector(`input[type="text"]`).value
+    newarr.push(value)
+    addComment.querySelector(`input[type="text"]`).value = ""
+    })

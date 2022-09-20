@@ -6,6 +6,7 @@ window.addEventListener("DOMContentLoaded", () => {
     let audioBtn = document.getElementById("audiobtn")
     let arrayOfW = document.getElementById("arrayOfWords")
     let showing = document.getElementById("discription")
+
     let dialogBox=document.getElementById("dialog-box")
     let img=document.getElementById("img")
 
@@ -13,9 +14,6 @@ window.addEventListener("DOMContentLoaded", () => {
     //styling
     img.style.display="none";
     dialogBox.style.display="none";
-
-    
-
 
     // fetch("https://random-word-api.herokuapp.com/All").then(res => res.json())
     // .then(data => console.log(data[0]))
@@ -29,7 +27,6 @@ window.addEventListener("DOMContentLoaded", () => {
             defination.innerText = `Definition: ${json[0].definition}`
              pronounceW.innerText = `Pronunciation: ${json[0].pronunciation}`
              let word2 = `${json[0].word}`
-     
     //Event listener for adding the speech
         audioBtn.addEventListener("click", () => {
             speaks = [
@@ -62,9 +59,11 @@ window.addEventListener("DOMContentLoaded", () => {
                   fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`)
                   .then(res => res.json()).then(data2 => {
                     console.log(data2)
+
                     dialogBox.innerHTML=`You selected ${word}! Click Next!`
                     img.style.display="block";
                     dialogBox.style.display="block";
+
 
                    
                     //  let name = document.createElement("p")
@@ -152,17 +151,11 @@ audio3.play();
 
 });
 
-const options = {
-	method: 'GET',
-	headers: {
-		'X-RapidAPI-Key': 'a814b05c93msh2cd39afebec73fap1d509cjsnb19622b7a4fa',
-		'X-RapidAPI-Host': 'deezerdevs-deezer.p.rapidapi.com'
-	}
-};
+
 // fetch('https://deezerdevs-deezer.p.rapidapi.com/search?q=eminem', options)
 // 	.then(response => response.json())
 // 	.then(response => window.open(response.data[9].preview))
 // 	.catch(err => console.error(err));
 
 
-    
+    })  

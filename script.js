@@ -44,6 +44,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 randomW.style.marginTop = `${Math.random() * 10}px`
                 randomW.style.marginLeft = `${Math.random() * 10}px`
                 let word = `${data.word}`
+                randomW.style.boxShadow = "inset 0 0 10px #000000"
               // eventlistener for when the button is clicked
                 randomW.addEventListener("click", () => {
                   arrayOfW.innerText = "";
@@ -52,13 +53,13 @@ window.addEventListener("DOMContentLoaded", () => {
                     console.log(data2)
 
                    
-                    //  let name = document.createElement("p")
-                    //  let meaning = document.createElement("p")
-                    //  let example = document.createElement("p")
-                    //  showing.append(name,meaning,example)
-                    //  name.innerText = `Word: ${data2.word}`
-                    //  meaning.innerText = `Meaning: ${data2.results[0].definition} `
-                    //  example.innerText = `Pronunciation: ${data2.pronunciation.all}`
+                     let name = document.createElement("p")
+                     let meaning = document.createElement("p")
+                     let example = document.createElement("p")
+                     showing.append(name,meaning,example)
+                     name.innerText = `Word: ${data2.word}`
+                     meaning.innerText = `Meaning: ${data2.results[0].definition} `
+                     example.innerText = `Pronunciation: ${data2.pronunciation.all}`
                     
                   })
                 })
